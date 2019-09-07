@@ -251,12 +251,11 @@ void PWM_IC_Print(void)
 	int i = 0;
 	for(i = 0;i<8;i++)
 	{
+		//超时判断
+		if(TIM_ICUserValue[i].Time_OutFlag == 1)
+			continue;
 		if(TIM_ICUserValue[i].Capture_FinishFlag == 1) 
-		{
-			//超时判断
-			if(TIM_ICUserValue[i].Time_OutFlag == 1)
-				continue;
-			
+		{		
 			// 计算一个周期的计数器的值
 			fre = (TIM_ICUserValue[i].Capture_CcrValue+1);
 			//滤波器
